@@ -1,6 +1,17 @@
 # Topic
 
+
+
 Pick some subset of the information covered in your annual review article that you are interested in exploring in more detail. 
 
+This user guide will focus on evaluating continuous diagnostic tests using receiver operating characteristic or ROC curves. The guide will cover how to generate the ROC curves from the given continuous test results, how to interpret their shape, and how to summarize diagnostic accuracy using the area under the curve, also referred to as AUC in the article. This guide emphasizes practical implementation in R and assumes users are familiar with basic statistical concepts such as sensitivity and specificity, both essential the the interpretation of the ROC curves. 
+
+The guide will demonstrate how to perform ROC analysis using commonly used R packages, such as pROC, including how to compute ROC curves and AUC values and how to visualize results. Guidance will be provided on when ROC curves are an appropriate tool for evaluating diagnostic performance and when they may be misleading or insufficient, such as in settings where disease prevalence or decision costs are critical, as well as a guide for how to determine when using the ROC is an appropriate analysis. This guide will also provide guidance on when this analysis is acceptable, eg. for continous tests and not for binary tests, and what format the data must be in in order to preform said analysis.
+
+This user guide will not cover advanced topics discussed in the review article, including covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection methods such as the Youden Index. These topics are excluded to maintain a clear focus on foundational ROC analysis for continuous diagnostic tests.
+
+
 Identify the scope of your user guide - what will you cover? Specific software packages? When to use or not to use a specific technique?
+
+
 

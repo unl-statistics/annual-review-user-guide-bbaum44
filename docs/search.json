@@ -1,0 +1,45 @@
+[
+  {
+    "objectID": "topic.html",
+    "href": "topic.html",
+    "title": "Appendix A — Topic",
+    "section": "",
+    "text": "Pick some subset of the information covered in your annual review article that you are interested in exploring in more detail.\nThis user guide will focus on evaluating continuous diagnostic tests using receiver operating characteristic or ROC curves. The guide will cover how to generate the ROC curves from the given continuous test results, how to interpret their shape, and how to summarize diagnostic accuracy using the area under the curve, also referred to as AUC in the article. This guide emphasizes practical implementation in R and assumes users are familiar with basic statistical concepts such as sensitivity and specificity, both essential the the interpretation of the ROC curves.\nThe guide will demonstrate how to perform ROC analysis using commonly used R packages, such as pROC, including how to compute ROC curves and AUC values and how to visualize results. Guidance will be provided on when ROC curves are an appropriate tool for evaluating diagnostic performance and when they may be misleading or insufficient, such as in settings where disease prevalence or decision costs are critical, as well as a guide for how to determine when using the ROC is an appropriate analysis. This guide will also provide guidance on when this analysis is acceptable, eg. for continous tests and not for binary tests, and what format the data must be in in order to preform said analysis.\nThis user guide will not cover advanced topics discussed in the review article, including covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection methods such as the Youden Index. These topics are excluded to maintain a clear focus on foundational ROC analysis for continuous diagnostic tests.\nIdentify the scope of your user guide - what will you cover? Specific software packages? When to use or not to use a specific technique?",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Topic</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html",
+    "href": "guide.html",
+    "title": "1  User Guide",
+    "section": "",
+    "text": "First off, you should change this section title to something more appropriate.\nNext, well, that’s up to you. Good luck!",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>User Guide</span>"
+    ]
+  },
+  {
+    "objectID": "needs.html",
+    "href": "needs.html",
+    "title": "Appendix B — Needs Assessment",
+    "section": "",
+    "text": "What does someone trying to accomplish your chosen task need help with?\nWhat parts are likely to be tricky?\nWhat resources are already available on this topic that may be helpful? Look for e.g. software vignettes, package documentation, papers about software packages, and so on.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Needs Assessment</span>"
+    ]
+  },
+  {
+    "objectID": "task-analysis.html",
+    "href": "task-analysis.html",
+    "title": "Appendix C — Task Analysis",
+    "section": "",
+    "text": "C.1 Additional Guidance\nHere are some questions to guide you through the process of doing a task analysis. You don’t have to specifically answer each one of these (and some may not apply), but they should get you started thinking in the right direction.\nWhat are the prerequisites, for both knowledge and e.g. software setup?\nWhat are the basic requirements for any data that the method is used on? - Are missing values allowed? - Should the data be confined within a certain range? - Does the data have to be approximately normally distributed?\nWhat are the basic components of the task? - Outline these in a bit more detail\nWhat decisions does the user need to be prepared to make on the fly?\nWhat questions should the user ask of the “first draft” of the product? What adjustments may need to be made?\nYour check-in should answer these basic questions (and similar concerns that apply more directly to your topic).\nOnce you’ve completed the check-in, you can use this section to jump-start an introduction/set-up/getting started section in your user guide. This document should remain as an appendix to your main report.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Task Analysis</span>"
+    ]
+  }
+]
