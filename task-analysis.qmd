@@ -5,19 +5,41 @@ Here are some questions to guide you through the process of doing a task analysi
 
 What are the prerequisites, for both knowledge and e.g. software setup? 
 
+Users should understand basic diagnostic testing concepts: sensitivity, specificity, and binary disease outcomes. Basic R skills are required loading data, installing packages, and running functions. Users will need R, RStudio, and the `pROC` and `ggplot2` packages installed.
+
 What are the basic requirements for any data that the method is used on? 
-  - Are missing values allowed? 
-  - Should the data be confined within a certain range? 
-  - Does the data have to be approximately normally distributed? 
+
+- Are missing values allowed? 
+- Should the data be confined within a certain range? 
+- Does the data have to be approximately normally distributed? 
+  
+  The dataset must have a numeric column for the continuous test result and a binary column for disease status (0/1 or a two-level factor). (ROC analysis is not appropriate for binary test results) Missing values are dropped by default in `pROC`, so users should check how many observations are affected. No distribution assumptions are required.
+
 
 What are the basic components of the task?
   - Outline these in a bit more detail
+  
+1. Decide if ROC analysis is appropriate.(this includes identifieing if the results are continous or binary and if the use of a ROC curve is relevant)
+2. Prepare the data. Confirm column types, check for missing values
+3. Generate the ROC curve and AUC. Use `pROC::roc()` with the response and predictor variables, then `pROC::auc()` to get the AUC.
+4. Visualize and interpret. Plot using `pROC::ggroc()` and annotate with the AUC.As describied in the article (basic interpretation), a curve bowing toward the upper-left indicates good discrimination; an AUC of 0.5 means no discriminative ability and 1.0 means perfect.
 
 
 What decisions does the user need to be prepared to make on the fly?
 
+- Is ROC analysis the right tool for this data and research question?
+- Is the test direction set correctly in `roc()`? (`direction = "<"` or `direction = ">"`) 
+- Is the AUC meaningful in this clinical or scientific context?
+
 What questions should the user ask of the "first draft" of the product? What adjustments may need to be made?
 
+- Does the curve bow toward the upper-left as expected?
+- Does the observation count match your dataset?
+- Are results consistent with prior literature on this test?
+
+adjustments
+
+-If the AUC is below 0.5, the test direction is likely flipped and might require user to reverse the direction argument.
 
 ## Additional Guidance 
 

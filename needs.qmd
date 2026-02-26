@@ -2,8 +2,23 @@
 
 What does someone trying to accomplish your chosen task need help with? 
 
+They would need the most help with the implementation of coding. Assuming this guide is intended for applied researchers in biology and medicine. Users new to using these packages or coding will likely struggle a bit  to connect the underlying concepts to actual implementation in R.
+
 What parts are likely to be tricky? 
 
+The trickiest part for most users is choosing the right R package and functions. Several options exist (`pROC`, `ROCR`, `OptimalCutpoints`), and it is not always obvious which to use or how the key functions relate to one another. Users may also be unsure when ROC analysis is actually appropriate versus when it might be misleading. Might also be worth adding some requirements for the data that is being used.
+
 What resources are already available on this topic that may be helpful? Look for e.g. software vignettes, package documentation, papers about software packages, and so on.
+
+Some that I found were:
+`pROC` package vignette
+Robin et al. (2011) paper in *BMC Bioinformatics*
+Fawcett (2006) *Pattern Recognition Letters*
+
+(will use these to help describe in more depth what the curves purposes are and hot to draw conclusions that are statistically correct based on the produced reults.)
+
+# Needs Assessment {.appendix}
+
+
 
 
