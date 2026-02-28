@@ -15,6 +15,11 @@ What are the basic requirements for any data that the method is used on?
   
   The dataset must have a numeric column for the continuous test result and a binary column for disease status (0/1 or a two-level factor). (ROC analysis is not appropriate for binary test results) Missing values are dropped by default in `pROC`, so users should check how many observations are affected. No distribution assumptions are required.
 
+::: callout-note
+
+Ok, so does the continuous test result need to have a specific range? What happens if it is pathologically close to binary -- e.g. -1ish for about half the observations, 1ish for about half of the observations, with one observation in the middle at 0? I suspect it's not quite so easy as just saying "continuous" -- usually there are still some basic expectations (that may not be well defined, but that you should define as well as you can).
+
+:::
 
 What are the basic components of the task?
   - Outline these in a bit more detail
