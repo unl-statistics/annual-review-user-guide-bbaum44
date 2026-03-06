@@ -1,5 +1,279 @@
-# User Guide
+---
+title: "Evaluating Diagnostic Tests with ROC Curves in R"
+format: html
+bibliography: references.bib
+---
 
-First off, you should change this section title to something more appropriate.
+## Introduction
 
-Next, well, that's up to you. Good luck!
+Diagnostic tests in medicine and biology rarely produce a simple yes/no result. More often, they produce a continuous measurement, for example a biomarker concentration, an imaging score, a blood pressure reading. The researcher must decide how well that measurement distinguishes between individuals with and without a condition. Receiver Operating Characteristic (ROC) curves are one of the most widely used tools for evaluating this kind of diagnostic performance.
+
+This guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the `pROC` package [@robin2011].
+
+This guide does **not** cover advanced topics such as covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection (e.g., the Youden Index). Those topics are excluded to keep the focus on foundational ROC analysis.
+
+---
+
+## Prerequisites
+
+### Knowledge
+
+You should be familiar with:
+
+- **Sensitivity**: the probability that the test is positive given the person has the disease (true positive rate)
+- **Specificity**: the probability that the test is negative given the person does not have the disease (true negative rate)
+- **Binary outcomes**: your reference standard should classify each individual as diseased (1) or non-diseased (0)
+
+No prior experience with ROC curves is needed 
+
+### Software
+
+You will need R and RStudio installed, along with the following packages:
+
+```{r}
+#loading the following packages and install if necessary
+library(pROC)
+library(ggplot2)
+library(mlbench)
+```
+
+
+## The Data
+
+This guide uses three datasets to demonstrate ROC analysis across different applied contexts.
+
+### 1. `aSAH` — Aneurysmal Subarachnoid Hemorrhage
+
+Built into the `pROC` package. The dataset contains clinical and biomarker data from patients with subarachnoid hemorrhage. We use the biomarker `s100b` to predict a poor neurological outcome (`outcome`).
+
+```{r}
+#load and preview dataset-asah
+
+data(aSAH)
+head(aSAH)
+str(aSAH)
+```
+
+### 2. `PimaIndiansDiabetes` — Diabetes Screening
+
+From the `mlbench` package, the dataset contains health measurements for Pima Indian women. We use `glucose` to predict diabetes status (`diabetes`).
+
+```{r}
+#load and preview data set-pima
+
+data(PimaIndiansDiabetes)
+head(PimaIndiansDiabetes)
+str(PimaIndiansDiabetes)
+```
+
+### 3. Cleveland Heart Disease Dataset
+
+Loaded directly from the UCI Machine Learning Repository. We use `thalach` (maximum heart rate achieved) to predict heart disease presence (`target`).
+
+```{r}
+#load-heart
+heart <- read.csv(
+  "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+  header = FALSE,
+  na.strings = "?"
+)
+colnames(heart) <- c("age", "sex", "cp", "trestbps", "chol",
+                     "fbs", "restecg", "thalach", "exang",
+                     "oldpeak", "slope", "ca", "thal", "target")
+heart$target <- ifelse(heart$target > 0, 1, 0)
+head(heart)
+str(heart)
+```
+
+
+## Step 1: Is ROC Analysis Appropriate for Your Data?
+
+Before writing any code, confirm that ROC analysis is the right tool.
+
+**ROC analysis is appropriate when:**
+
+- Your diagnostic test produces a **continuous or ordinal** result (e.g., a blood glucose level, a probability score)
+- You have a **binary reference standard** — each observation is either diseased (1) or non-diseased (0)
+- Your goal is to evaluate **overall discriminative ability** across all possible thresholds, not performance at one specific cutoff
+
+**ROC analysis is not appropriate when:**
+
+- Your test result is already **binary** (positive/negative) 
+- Disease **prevalence is very low** 
+- The **costs of false positives and false negatives are very different** — ROC curves treat both error types equally
+
+### Quick Checklist
+
+| Question | Required Answer |
+|---|---|
+| Is the test result continuous or ordinal? | Yes |
+| Is the outcome binary (diseased / not diseased)? | Yes |
+| Am I interested in performance across all thresholds? | Yes |
+| Is disease prevalence reasonably balanced? | Ideally yes |
+
+
+
+## Step 2: Prepare Your Data
+
+Your dataset must have at minimum:
+
+- A **numeric column** for the test result
+- A **binary column** for the outcome (0/1 or a two-level factor)
+
+Check your data structure and look for missing values before proceeding.
+
+```{r}
+#| label: check-data
+# Check structure
+str(aSAH)
+
+# Check for missing values
+sum(is.na(aSAH$s100b))
+sum(is.na(aSAH$outcome))
+
+# Confirm outcome levels
+table(aSAH$outcome)
+```
+
+The `pROC` package drops missing values automatically, but you should know how many observations are affected. If missingness is substantial or non-random, address it before running the analysis.
+
+
+
+## Step 3: Generate the ROC Curve
+
+Use `pROC::roc()` to fit the ROC curve. The two key arguments are:
+
+- `response`: the binary outcome variable
+- `predictor`: the continuous test result
+
+```{r}
+#| label: roc-asah
+roc_asah <- roc(response = aSAH$outcome, predictor = aSAH$s100b)
+roc_asah
+```
+
+### Understanding the Direction Warning
+
+`pROC` will print a message about the `direction` it assumed (e.g., `direction: controls < cases`). This tells you whether higher test values are assumed to indicate disease. **Do not ignore this.** If the assumed direction is wrong for your test, your curve will be mirrored and your AUC will be below 0.5. You can set the direction explicitly:
+
+```{r}
+#| label: roc-direction
+# Higher s100b -> worse outcome: controls < cases (default is correct here)
+roc_asah <- roc(response = aSAH$outcome,
+                predictor = aSAH$s100b,
+                direction = "<")
+```
+
+
+## Step 4: Compute and Interpret AUC
+
+The Area Under the Curve (AUC) summarizes the ROC curve in a single number.
+
+- **AUC = 0.5**: the test performs no better than random chance
+- **AUC = 1.0**: the test perfectly separates diseased from non-diseased individuals
+- **AUC = 0.7–0.8**: generally considered acceptable discrimination
+- **AUC > 0.8**: generally considered excellent discrimination
+
+These are rough benchmarks — what counts as "good enough" depends on your clinical or scientific context.
+
+```{r}
+#| label: auc-asah
+auc(roc_asah)
+ci.auc(roc_asah)
+```
+
+Repeat for the other datasets:
+
+```{r}
+#| label: roc-pima
+roc_pima <- roc(response = PimaIndiansDiabetes$diabetes,
+                predictor = PimaIndiansDiabetes$glucose,
+                direction = "<")
+auc(roc_pima)
+ci.auc(roc_pima)
+```
+
+```{r}
+#| label: roc-heart
+heart_clean <- na.omit(heart[, c("thalach", "target")])
+roc_heart <- roc(response = heart_clean$target,
+                 predictor = heart_clean$thalach,
+                 direction = ">")  # higher heart rate -> less likely disease
+auc(roc_heart)
+ci.auc(roc_heart)
+```
+
+
+## Step 5: Visualize the ROC Curve
+
+A good visualization shows the curve, the diagonal reference line (random chance), and the AUC value.
+
+### Basic Plot with `pROC`
+
+```{r}
+#| label: plot-basic
+plot(roc_asah,
+     main = "ROC Curve: s100b predicting poor outcome (aSAH)",
+     col = "#2c7bb6",
+     lwd = 2)
+legend("bottomright",
+       legend = paste("AUC =", round(auc(roc_asah), 3)),
+       col = "#2c7bb6", lwd = 2)
+```
+
+### Polished Plot with `ggplot2`
+
+```{r}
+#| label: plot-ggplot
+roc_df <- data.frame(
+  specificity = roc_asah$specificities,
+  sensitivity = roc_asah$sensitivities
+)
+
+ggplot(roc_df, aes(x = 1 - specificity, y = sensitivity)) +
+  geom_line(color = "#2c7bb6", linewidth = 1.2) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray50") +
+  annotate("text", x = 0.75, y = 0.1,
+           label = paste("AUC =", round(auc(roc_asah), 3)),
+           size = 5, color = "#2c7bb6") +
+  labs(title = "ROC Curve: s100b predicting poor outcome (aSAH)",
+       x = "1 - Specificity (False Positive Rate)",
+       y = "Sensitivity (True Positive Rate)") +
+  theme_minimal()
+```
+
+### Comparing Multiple ROC Curves
+
+```{r}
+#| label: plot-compare
+ggroc(list(aSAH = roc_asah, Diabetes = roc_pima, Heart = roc_heart),
+      linewidth = 1.1) +
+  geom_abline(slope = 1, intercept = 1, linetype = "dashed", color = "gray50") +
+  labs(title = "ROC Curve Comparison Across Datasets",
+       x = "1 - Specificity", y = "Sensitivity",
+       color = "Dataset") +
+  theme_minimal()
+```
+
+
+
+## Step 6: Evaluate Your Results
+
+Once you have a curve and AUC, ask yourself:
+
+- Does the curve bow toward the **upper-left** corner? If it hugs the diagonal, the test has little discriminative ability.
+- Is the **AUC above 0.5**? If not, check whether the `direction` argument is set correctly.
+- Does the **observation count** in the `pROC` output match your dataset? If not, check for unexpected missing values.
+- Is the **confidence interval** for the AUC reasonably narrow? Wide intervals suggest insufficient sample size.
+- Does the AUC make sense given what is known about this test from prior literature?
+
+
+
+## Additional Resources
+
+- **`pROC` vignette**: Run `vignette("pROC")` in R or see @robin2011 for the full paper
+- **Fawcett (2006)**: A readable conceptual introduction to ROC analysis [@fawcett2006]
+- **Pepe (2003)**: A comprehensive textbook treatment of diagnostic test evaluation [@pepe2003]
+
+
+

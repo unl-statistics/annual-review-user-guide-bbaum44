@@ -1,45 +1,145 @@
 [
   {
-    "objectID": "topic.html",
-    "href": "topic.html",
-    "title": "Appendix A — Topic",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Evaluating Diagnostic Tests with ROC Curves in R",
     "section": "",
-    "text": "Pick some subset of the information covered in your annual review article that you are interested in exploring in more detail.\nThis user guide will focus on evaluating continuous diagnostic tests using receiver operating characteristic or ROC curves. The guide will cover how to generate the ROC curves from the given continuous test results, how to interpret their shape, and how to summarize diagnostic accuracy using the area under the curve, also referred to as AUC in the article. This guide emphasizes practical implementation in R and assumes users are familiar with basic statistical concepts such as sensitivity and specificity, both essential the the interpretation of the ROC curves.\nThe guide will demonstrate how to perform ROC analysis using commonly used R packages, such as pROC, including how to compute ROC curves and AUC values and how to visualize results. Guidance will be provided on when ROC curves are an appropriate tool for evaluating diagnostic performance and when they may be misleading or insufficient, such as in settings where disease prevalence or decision costs are critical, as well as a guide for how to determine when using the ROC is an appropriate analysis. This guide will also provide guidance on when this analysis is acceptable, eg. for continous tests and not for binary tests, and what format the data must be in in order to preform said analysis.\nThis user guide will not cover advanced topics discussed in the review article, including covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection methods such as the Youden Index. These topics are excluded to maintain a clear focus on foundational ROC analysis for continuous diagnostic tests.\nIdentify the scope of your user guide - what will you cover? Specific software packages? When to use or not to use a specific technique?",
+    "text": "Assignment Flow",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Topic</span>"
+      "Assignment Flow"
     ]
   },
   {
     "objectID": "guide.html",
     "href": "guide.html",
-    "title": "1  User Guide",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
     "section": "",
-    "text": "First off, you should change this section title to something more appropriate.\nNext, well, that’s up to you. Good luck!",
+    "text": "1.1 Introduction\nDiagnostic tests in medicine and biology rarely produce a simple yes/no result. More often, they produce a continuous measurement, for example a biomarker concentration, an imaging score, a blood pressure reading. The researcher must decide how well that measurement distinguishes between individuals with and without a condition. Receiver Operating Characteristic (ROC) curves are one of the most widely used tools for evaluating this kind of diagnostic performance.\nThis guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the pROC package (Robin et al. 2011).\nThis guide does not cover advanced topics such as covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection (e.g., the Youden Index). Those topics are excluded to keep the focus on foundational ROC analysis.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>User Guide</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#prerequisites",
+    "href": "guide.html#prerequisites",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.2 Prerequisites",
+    "text": "1.2 Prerequisites\n\n1.2.1 Knowledge\nYou should be familiar with:\n\nSensitivity: the probability that the test is positive given the person has the disease (true positive rate)\nSpecificity: the probability that the test is negative given the person does not have the disease (true negative rate)\nBinary outcomes: your reference standard should classify each individual as diseased (1) or non-diseased (0)\n\nNo prior experience with ROC curves is needed\n\n\n1.2.2 Software\nYou will need R and RStudio installed, along with the following packages:\n\n#loading the following packages and install if necessary\nlibrary(pROC)\n\nWarning: package 'pROC' was built under R version 4.4.3\n\n\nType 'citation(\"pROC\")' for a citation.\n\n\n\nAttaching package: 'pROC'\n\n\nThe following objects are masked from 'package:stats':\n\n    cov, smooth, var\n\nlibrary(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.4.3\n\nlibrary(mlbench)\n\nWarning: package 'mlbench' was built under R version 4.4.3",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#the-data",
+    "href": "guide.html#the-data",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.3 The Data",
+    "text": "1.3 The Data\nThis guide uses three datasets to demonstrate ROC analysis across different applied contexts.\n\n1.3.1 1. aSAH — Aneurysmal Subarachnoid Hemorrhage\nBuilt into the pROC package. The dataset contains clinical and biomarker data from patients with subarachnoid hemorrhage. We use the biomarker s100b to predict a poor neurological outcome (outcome).\n\n#load and preview dataset-asah\n\ndata(aSAH)\nhead(aSAH)\n\n   gos6 outcome gender age wfns s100b  ndka\n29    5    Good Female  42    1  0.13  3.01\n30    5    Good Female  37    1  0.14  8.54\n31    5    Good Female  42    1  0.10  8.09\n32    5    Good Female  27    1  0.04 10.42\n33    1    Poor Female  42    3  0.13 17.40\n34    1    Poor   Male  48    2  0.10 12.75\n\nstr(aSAH)\n\n'data.frame':   113 obs. of  7 variables:\n $ gos6   : Ord.factor w/ 5 levels \"1\"&lt;\"2\"&lt;\"3\"&lt;\"4\"&lt;..: 5 5 5 5 1 1 4 1 5 4 ...\n $ outcome: Factor w/ 2 levels \"Good\",\"Poor\": 1 1 1 1 2 2 1 2 1 1 ...\n $ gender : Factor w/ 2 levels \"Male\",\"Female\": 2 2 2 2 2 1 1 1 2 2 ...\n $ age    : int  42 37 42 27 42 48 57 41 49 75 ...\n $ wfns   : Ord.factor w/ 5 levels \"1\"&lt;\"2\"&lt;\"3\"&lt;\"4\"&lt;..: 1 1 1 1 3 2 5 4 1 2 ...\n $ s100b  : num  0.13 0.14 0.1 0.04 0.13 0.1 0.47 0.16 0.18 0.1 ...\n $ ndka   : num  3.01 8.54 8.09 10.42 17.4 ...\n\n\n\n\n1.3.2 2. PimaIndiansDiabetes — Diabetes Screening\nFrom the mlbench package, the dataset contains health measurements for Pima Indian women. We use glucose to predict diabetes status (diabetes).\n\n#load and preview data set-pima\n\ndata(PimaIndiansDiabetes)\nhead(PimaIndiansDiabetes)\n\n  pregnant glucose pressure triceps insulin mass pedigree age diabetes\n1        6     148       72      35       0 33.6    0.627  50      pos\n2        1      85       66      29       0 26.6    0.351  31      neg\n3        8     183       64       0       0 23.3    0.672  32      pos\n4        1      89       66      23      94 28.1    0.167  21      neg\n5        0     137       40      35     168 43.1    2.288  33      pos\n6        5     116       74       0       0 25.6    0.201  30      neg\n\nstr(PimaIndiansDiabetes)\n\n'data.frame':   768 obs. of  9 variables:\n $ pregnant: num  6 1 8 1 0 5 3 10 2 8 ...\n $ glucose : num  148 85 183 89 137 116 78 115 197 125 ...\n $ pressure: num  72 66 64 66 40 74 50 0 70 96 ...\n $ triceps : num  35 29 0 23 35 0 32 0 45 0 ...\n $ insulin : num  0 0 0 94 168 0 88 0 543 0 ...\n $ mass    : num  33.6 26.6 23.3 28.1 43.1 25.6 31 35.3 30.5 0 ...\n $ pedigree: num  0.627 0.351 0.672 0.167 2.288 ...\n $ age     : num  50 31 32 21 33 30 26 29 53 54 ...\n $ diabetes: Factor w/ 2 levels \"neg\",\"pos\": 2 1 2 1 2 1 2 1 2 2 ...\n\n\n\n\n1.3.3 3. Cleveland Heart Disease Dataset\nLoaded directly from the UCI Machine Learning Repository. We use thalach (maximum heart rate achieved) to predict heart disease presence (target).\n\n#load-heart\nheart &lt;- read.csv(\n  \"https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data\",\n  header = FALSE,\n  na.strings = \"?\"\n)\ncolnames(heart) &lt;- c(\"age\", \"sex\", \"cp\", \"trestbps\", \"chol\",\n                     \"fbs\", \"restecg\", \"thalach\", \"exang\",\n                     \"oldpeak\", \"slope\", \"ca\", \"thal\", \"target\")\nheart$target &lt;- ifelse(heart$target &gt; 0, 1, 0)\nhead(heart)\n\n  age sex cp trestbps chol fbs restecg thalach exang oldpeak slope ca thal\n1  63   1  1      145  233   1       2     150     0     2.3     3  0    6\n2  67   1  4      160  286   0       2     108     1     1.5     2  3    3\n3  67   1  4      120  229   0       2     129     1     2.6     2  2    7\n4  37   1  3      130  250   0       0     187     0     3.5     3  0    3\n5  41   0  2      130  204   0       2     172     0     1.4     1  0    3\n6  56   1  2      120  236   0       0     178     0     0.8     1  0    3\n  target\n1      0\n2      1\n3      1\n4      0\n5      0\n6      0\n\nstr(heart)\n\n'data.frame':   303 obs. of  14 variables:\n $ age     : num  63 67 67 37 41 56 62 57 63 53 ...\n $ sex     : num  1 1 1 1 0 1 0 0 1 1 ...\n $ cp      : num  1 4 4 3 2 2 4 4 4 4 ...\n $ trestbps: num  145 160 120 130 130 120 140 120 130 140 ...\n $ chol    : num  233 286 229 250 204 236 268 354 254 203 ...\n $ fbs     : num  1 0 0 0 0 0 0 0 0 1 ...\n $ restecg : num  2 2 2 0 2 0 2 0 2 2 ...\n $ thalach : num  150 108 129 187 172 178 160 163 147 155 ...\n $ exang   : num  0 1 1 0 0 0 0 1 0 1 ...\n $ oldpeak : num  2.3 1.5 2.6 3.5 1.4 0.8 3.6 0.6 1.4 3.1 ...\n $ slope   : num  3 2 2 3 1 1 3 1 2 3 ...\n $ ca      : num  0 3 2 0 0 0 2 0 1 0 ...\n $ thal    : num  6 3 7 3 3 3 3 3 7 7 ...\n $ target  : num  0 1 1 0 0 0 1 0 1 1 ...",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#step-1-is-roc-analysis-appropriate-for-your-data",
+    "href": "guide.html#step-1-is-roc-analysis-appropriate-for-your-data",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.4 Step 1: Is ROC Analysis Appropriate for Your Data?",
+    "text": "1.4 Step 1: Is ROC Analysis Appropriate for Your Data?\nBefore writing any code, confirm that ROC analysis is the right tool.\nROC analysis is appropriate when:\n\nYour diagnostic test produces a continuous or ordinal result (e.g., a blood glucose level, a probability score)\nYou have a binary reference standard — each observation is either diseased (1) or non-diseased (0)\nYour goal is to evaluate overall discriminative ability across all possible thresholds, not performance at one specific cutoff\n\nROC analysis is not appropriate when:\n\nYour test result is already binary (positive/negative)\nDisease prevalence is very low\nThe costs of false positives and false negatives are very different — ROC curves treat both error types equally\n\n\n1.4.1 Quick Checklist\n\n\n\nQuestion\nRequired Answer\n\n\n\n\nIs the test result continuous or ordinal?\nYes\n\n\nIs the outcome binary (diseased / not diseased)?\nYes\n\n\nAm I interested in performance across all thresholds?\nYes\n\n\nIs disease prevalence reasonably balanced?\nIdeally yes",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#step-2-prepare-your-data",
+    "href": "guide.html#step-2-prepare-your-data",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.5 Step 2: Prepare Your Data",
+    "text": "1.5 Step 2: Prepare Your Data\nYour dataset must have at minimum:\n\nA numeric column for the test result\nA binary column for the outcome (0/1 or a two-level factor)\n\nCheck your data structure and look for missing values before proceeding.\n\n# Check structure\nstr(aSAH)\n\n'data.frame':   113 obs. of  7 variables:\n $ gos6   : Ord.factor w/ 5 levels \"1\"&lt;\"2\"&lt;\"3\"&lt;\"4\"&lt;..: 5 5 5 5 1 1 4 1 5 4 ...\n $ outcome: Factor w/ 2 levels \"Good\",\"Poor\": 1 1 1 1 2 2 1 2 1 1 ...\n $ gender : Factor w/ 2 levels \"Male\",\"Female\": 2 2 2 2 2 1 1 1 2 2 ...\n $ age    : int  42 37 42 27 42 48 57 41 49 75 ...\n $ wfns   : Ord.factor w/ 5 levels \"1\"&lt;\"2\"&lt;\"3\"&lt;\"4\"&lt;..: 1 1 1 1 3 2 5 4 1 2 ...\n $ s100b  : num  0.13 0.14 0.1 0.04 0.13 0.1 0.47 0.16 0.18 0.1 ...\n $ ndka   : num  3.01 8.54 8.09 10.42 17.4 ...\n\n# Check for missing values\nsum(is.na(aSAH$s100b))\n\n[1] 0\n\nsum(is.na(aSAH$outcome))\n\n[1] 0\n\n# Confirm outcome levels\ntable(aSAH$outcome)\n\n\nGood Poor \n  72   41 \n\n\nThe pROC package drops missing values automatically, but you should know how many observations are affected. If missingness is substantial or non-random, address it before running the analysis.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#step-3-generate-the-roc-curve",
+    "href": "guide.html#step-3-generate-the-roc-curve",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.6 Step 3: Generate the ROC Curve",
+    "text": "1.6 Step 3: Generate the ROC Curve\nUse pROC::roc() to fit the ROC curve. The two key arguments are:\n\nresponse: the binary outcome variable\npredictor: the continuous test result\n\n\nroc_asah &lt;- roc(response = aSAH$outcome, predictor = aSAH$s100b)\n\nSetting levels: control = Good, case = Poor\n\n\nSetting direction: controls &lt; cases\n\nroc_asah\n\n\nCall:\nroc.default(response = aSAH$outcome, predictor = aSAH$s100b)\n\nData: aSAH$s100b in 72 controls (aSAH$outcome Good) &lt; 41 cases (aSAH$outcome Poor).\nArea under the curve: 0.7314\n\n\n\n1.6.1 Understanding the Direction Warning\npROC will print a message about the direction it assumed (e.g., direction: controls &lt; cases). This tells you whether higher test values are assumed to indicate disease. Do not ignore this. If the assumed direction is wrong for your test, your curve will be mirrored and your AUC will be below 0.5. You can set the direction explicitly:\n\n# Higher s100b -&gt; worse outcome: controls &lt; cases (default is correct here)\nroc_asah &lt;- roc(response = aSAH$outcome,\n                predictor = aSAH$s100b,\n                direction = \"&lt;\")\n\nSetting levels: control = Good, case = Poor",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#step-4-compute-and-interpret-auc",
+    "href": "guide.html#step-4-compute-and-interpret-auc",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.7 Step 4: Compute and Interpret AUC",
+    "text": "1.7 Step 4: Compute and Interpret AUC\nThe Area Under the Curve (AUC) summarizes the ROC curve in a single number.\n\nAUC = 0.5: the test performs no better than random chance\nAUC = 1.0: the test perfectly separates diseased from non-diseased individuals\nAUC = 0.7–0.8: generally considered acceptable discrimination\nAUC &gt; 0.8: generally considered excellent discrimination\n\nThese are rough benchmarks — what counts as “good enough” depends on your clinical or scientific context.\n\nauc(roc_asah)\n\nArea under the curve: 0.7314\n\nci.auc(roc_asah)\n\n95% CI: 0.6301-0.8326 (DeLong)\n\n\nRepeat for the other datasets:\n\nroc_pima &lt;- roc(response = PimaIndiansDiabetes$diabetes,\n                predictor = PimaIndiansDiabetes$glucose,\n                direction = \"&lt;\")\n\nSetting levels: control = neg, case = pos\n\nauc(roc_pima)\n\nArea under the curve: 0.7881\n\nci.auc(roc_pima)\n\n95% CI: 0.7546-0.8217 (DeLong)\n\n\n\nheart_clean &lt;- na.omit(heart[, c(\"thalach\", \"target\")])\nroc_heart &lt;- roc(response = heart_clean$target,\n                 predictor = heart_clean$thalach,\n                 direction = \"&gt;\")  # higher heart rate -&gt; less likely disease\n\nSetting levels: control = 0, case = 1\n\nauc(roc_heart)\n\nArea under the curve: 0.7453\n\nci.auc(roc_heart)\n\n95% CI: 0.6901-0.8005 (DeLong)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#step-5-visualize-the-roc-curve",
+    "href": "guide.html#step-5-visualize-the-roc-curve",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.8 Step 5: Visualize the ROC Curve",
+    "text": "1.8 Step 5: Visualize the ROC Curve\nA good visualization shows the curve, the diagonal reference line (random chance), and the AUC value.\n\n1.8.1 Basic Plot with pROC\n\nplot(roc_asah,\n     main = \"ROC Curve: s100b predicting poor outcome (aSAH)\",\n     col = \"#2c7bb6\",\n     lwd = 2)\nlegend(\"bottomright\",\n       legend = paste(\"AUC =\", round(auc(roc_asah), 3)),\n       col = \"#2c7bb6\", lwd = 2)\n\n\n\n\n\n\n\n\n\n\n1.8.2 Polished Plot with ggplot2\n\nroc_df &lt;- data.frame(\n  specificity = roc_asah$specificities,\n  sensitivity = roc_asah$sensitivities\n)\n\nggplot(roc_df, aes(x = 1 - specificity, y = sensitivity)) +\n  geom_line(color = \"#2c7bb6\", linewidth = 1.2) +\n  geom_abline(slope = 1, intercept = 0, linetype = \"dashed\", color = \"gray50\") +\n  annotate(\"text\", x = 0.75, y = 0.1,\n           label = paste(\"AUC =\", round(auc(roc_asah), 3)),\n           size = 5, color = \"#2c7bb6\") +\n  labs(title = \"ROC Curve: s100b predicting poor outcome (aSAH)\",\n       x = \"1 - Specificity (False Positive Rate)\",\n       y = \"Sensitivity (True Positive Rate)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n1.8.3 Comparing Multiple ROC Curves\n\nggroc(list(aSAH = roc_asah, Diabetes = roc_pima, Heart = roc_heart),\n      linewidth = 1.1) +\n  geom_abline(slope = 1, intercept = 1, linetype = \"dashed\", color = \"gray50\") +\n  labs(title = \"ROC Curve Comparison Across Datasets\",\n       x = \"1 - Specificity\", y = \"Sensitivity\",\n       color = \"Dataset\") +\n  theme_minimal()",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#step-6-evaluate-your-results",
+    "href": "guide.html#step-6-evaluate-your-results",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.9 Step 6: Evaluate Your Results",
+    "text": "1.9 Step 6: Evaluate Your Results\nOnce you have a curve and AUC, ask yourself:\n\nDoes the curve bow toward the upper-left corner? If it hugs the diagonal, the test has little discriminative ability.\nIs the AUC above 0.5? If not, check whether the direction argument is set correctly.\nDoes the observation count in the pROC output match your dataset? If not, check for unexpected missing values.\nIs the confidence interval for the AUC reasonably narrow? Wide intervals suggest insufficient sample size.\nDoes the AUC make sense given what is known about this test from prior literature?",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "guide.html#additional-resources",
+    "href": "guide.html#additional-resources",
+    "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
+    "section": "1.10 Additional Resources",
+    "text": "1.10 Additional Resources\n\npROC vignette: Run vignette(\"pROC\") in R or see Robin et al. (2011) for the full paper\nFawcett (2006): A readable conceptual introduction to ROC analysis (Fawcett 2006)\nPepe (2003): A comprehensive textbook treatment of diagnostic test evaluation (pepe2003?)\n\n\n\n\n\nFawcett, Tom. 2006. “An Introduction to ROC Analysis.” Pattern Recognition Letters 27 (8): 861–74. https://doi.org/10.1016/j.patrec.2005.10.010.\n\n\nRobin, Xavier, Natacha Turck, Alexandre Hainard, Natalia Tiberti, Frédérique Lisacek, Jean-Charles Sanchez, and Markus Müller. 2011. “pROC: An Open-Source Package for R and S+ to Analyze and Compare ROC Curves.” BMC Bioinformatics 12 (1): 77. https://doi.org/10.1186/1471-2105-12-77.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Fawcett, Tom. 2006. “An Introduction to ROC\nAnalysis.” Pattern Recognition Letters 27 (8): 861–74.\nhttps://doi.org/10.1016/j.patrec.2005.10.010.\n\n\nRobin, Xavier, Natacha Turck, Alexandre Hainard, Natalia Tiberti,\nFrédérique Lisacek, Jean-Charles Sanchez, and Markus Müller. 2011.\n“pROC: An Open-Source Package for\nR and S+ to Analyze and Compare\nROC Curves.” BMC Bioinformatics 12 (1): 77.\nhttps://doi.org/10.1186/1471-2105-12-77.",
+    "crumbs": [
+      "References"
     ]
   },
   {
     "objectID": "needs.html",
     "href": "needs.html",
-    "title": "Appendix B — Needs Assessment",
+    "title": "Appendix A — Needs Assessment",
     "section": "",
-    "text": "What does someone trying to accomplish your chosen task need help with?\nWhat parts are likely to be tricky?\nWhat resources are already available on this topic that may be helpful? Look for e.g. software vignettes, package documentation, papers about software packages, and so on.",
+    "text": "What does someone trying to accomplish your chosen task need help with?\nThey would need the most help with the implementation of coding. Assuming this guide is intended for applied researchers in biology and medicine. Users new to using these packages or coding will likely struggle a bit to connect the underlying concepts to actual implementation in R.\nWhat parts are likely to be tricky?\nThe trickiest part for most users is choosing the right R package and functions. Several options exist (pROC, ROCR, OptimalCutpoints), and it is not always obvious which to use or how the key functions relate to one another. Users may also be unsure when ROC analysis is actually appropriate versus when it might be misleading. Might also add some requirements for the data that is being used.\nWhat resources are already available on this topic that may be helpful? Look for e.g. software vignettes, package documentation, papers about software packages, and so on.\nSome that I found were: pROC package vignette Robin et al. (2011) paper in BMC Bioinformatics Fawcett (2006) Pattern Recognition Letters\n(will use these to help describe in more depth what the curves purposes are and how to draw conclusions that are statistically correct based on the produced results.)\n\nB Needs Assessment",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Needs Assessment</span>"
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Needs Assessment</span>"
     ]
   },
   {
     "objectID": "task-analysis.html",
     "href": "task-analysis.html",
-    "title": "Appendix C — Task Analysis",
+    "title": "Appendix B — Task Analysis",
     "section": "",
-    "text": "C.1 Additional Guidance\nHere are some questions to guide you through the process of doing a task analysis. You don’t have to specifically answer each one of these (and some may not apply), but they should get you started thinking in the right direction.\nWhat are the prerequisites, for both knowledge and e.g. software setup?\nWhat are the basic requirements for any data that the method is used on? - Are missing values allowed? - Should the data be confined within a certain range? - Does the data have to be approximately normally distributed?\nWhat are the basic components of the task? - Outline these in a bit more detail\nWhat decisions does the user need to be prepared to make on the fly?\nWhat questions should the user ask of the “first draft” of the product? What adjustments may need to be made?\nYour check-in should answer these basic questions (and similar concerns that apply more directly to your topic).\nOnce you’ve completed the check-in, you can use this section to jump-start an introduction/set-up/getting started section in your user guide. This document should remain as an appendix to your main report.",
+    "text": "B.1 Additional Guidance\nHere are some questions to guide you through the process of doing a task analysis. You don’t have to specifically answer each one of these (and some may not apply), but they should get you started thinking in the right direction.\nWhat are the prerequisites, for both knowledge and e.g. software setup?\nUsers should understand basic diagnostic testing concepts: sensitivity, specificity, and binary disease outcomes. Basic R skills are required loading data, installing packages, and running functions. Users will need R, RStudio, and the pROC and ggplot2 packages installed.\nWhat are the basic requirements for any data that the method is used on?\nWhat are the basic components of the task? - Outline these in a bit more detail\nWhat decisions does the user need to be prepared to make on the fly?\nWhat questions should the user ask of the “first draft” of the product? What adjustments may need to be made?\nadjustments\n-If the AUC is below 0.5, the test direction is likely flipped and might require user to reverse the direction argument.\nYour check-in should answer these basic questions (and similar concerns that apply more directly to your topic).\nOnce you’ve completed the check-in, you can use this section to jump-start an introduction/set-up/getting started section in your user guide. This document should remain as an appendix to your main report.",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Task Analysis</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Task Analysis</span>"
     ]
   }
 ]

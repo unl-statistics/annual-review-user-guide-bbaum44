@@ -1,34 +1,24 @@
 project:
   type: book
   output-dir: docs
-
 date: today
 date-format: long
-
 from: markdown+emoji
-
 book:
-  title: "User Guide: Annual Review Article Topic"
-  author: "Author Name"
+  title: "Evaluating Diagnostic Tests with ROC Curves in R"
+  author: "Brynn Baumert"
   page-footer:
     left: "Copyright 2025, Author Name"
   chapters:
-    - index.qmd # Remove this before you submit your final report!
     - guide.qmd
     - references.qmd
   appendices:
-    - topic.qmd
+    - index.qmd
     - needs.qmd
     - task-analysis.qmd
-
 bibliography: references.bib
-
 format:
   html:
     highlight-style: a11y
     theme: cosmo
     code-copy: true
-  pdf:
-    documentclass: scrreprt
-
-

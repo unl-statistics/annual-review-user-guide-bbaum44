@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-02-04">
+<meta name="dcterms.date" content="2026-03-06">
 
-<title>1&nbsp; User Guide – User Guide: Annual Review Article Topic</title>
+<title>1&nbsp; Evaluating Diagnostic Tests with ROC Curves in R – Evaluating Diagnostic Tests with ROC Curves in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -32,7 +86,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./guide.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">User Guide</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./guide.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Evaluating Diagnostic Tests with ROC Curves in R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -97,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">User Guide: Annual Review Article Topic</a> 
+      <a href="./">Evaluating Diagnostic Tests with ROC Curves in R</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -109,14 +162,8 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Assignment Flow</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./guide.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">User Guide</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Evaluating Diagnostic Tests with ROC Curves in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -136,20 +183,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Topic</span></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment Flow</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./needs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Needs Assessment</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Needs Assessment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./task-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Task Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Task Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -159,15 +206,50 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1.1</span> Introduction</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites"><span class="header-section-number">1.2</span> Prerequisites</a>
+  <ul class="collapse">
+  <li><a href="#knowledge" id="toc-knowledge" class="nav-link" data-scroll-target="#knowledge"><span class="header-section-number">1.2.1</span> Knowledge</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software"><span class="header-section-number">1.2.2</span> Software</a></li>
+  </ul></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">1.3</span> The Data</a>
+  <ul class="collapse">
+  <li><a href="#asah-aneurysmal-subarachnoid-hemorrhage" id="toc-asah-aneurysmal-subarachnoid-hemorrhage" class="nav-link" data-scroll-target="#asah-aneurysmal-subarachnoid-hemorrhage"><span class="header-section-number">1.3.1</span> 1. <code>aSAH</code> — Aneurysmal Subarachnoid Hemorrhage</a></li>
+  <li><a href="#pimaindiansdiabetes-diabetes-screening" id="toc-pimaindiansdiabetes-diabetes-screening" class="nav-link" data-scroll-target="#pimaindiansdiabetes-diabetes-screening"><span class="header-section-number">1.3.2</span> 2. <code>PimaIndiansDiabetes</code> — Diabetes Screening</a></li>
+  <li><a href="#cleveland-heart-disease-dataset" id="toc-cleveland-heart-disease-dataset" class="nav-link" data-scroll-target="#cleveland-heart-disease-dataset"><span class="header-section-number">1.3.3</span> 3. Cleveland Heart Disease Dataset</a></li>
+  </ul></li>
+  <li><a href="#step-1-is-roc-analysis-appropriate-for-your-data" id="toc-step-1-is-roc-analysis-appropriate-for-your-data" class="nav-link" data-scroll-target="#step-1-is-roc-analysis-appropriate-for-your-data"><span class="header-section-number">1.4</span> Step 1: Is ROC Analysis Appropriate for Your Data?</a>
+  <ul class="collapse">
+  <li><a href="#quick-checklist" id="toc-quick-checklist" class="nav-link" data-scroll-target="#quick-checklist"><span class="header-section-number">1.4.1</span> Quick Checklist</a></li>
+  </ul></li>
+  <li><a href="#step-2-prepare-your-data" id="toc-step-2-prepare-your-data" class="nav-link" data-scroll-target="#step-2-prepare-your-data"><span class="header-section-number">1.5</span> Step 2: Prepare Your Data</a></li>
+  <li><a href="#step-3-generate-the-roc-curve" id="toc-step-3-generate-the-roc-curve" class="nav-link" data-scroll-target="#step-3-generate-the-roc-curve"><span class="header-section-number">1.6</span> Step 3: Generate the ROC Curve</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-direction-warning" id="toc-understanding-the-direction-warning" class="nav-link" data-scroll-target="#understanding-the-direction-warning"><span class="header-section-number">1.6.1</span> Understanding the Direction Warning</a></li>
+  </ul></li>
+  <li><a href="#step-4-compute-and-interpret-auc" id="toc-step-4-compute-and-interpret-auc" class="nav-link" data-scroll-target="#step-4-compute-and-interpret-auc"><span class="header-section-number">1.7</span> Step 4: Compute and Interpret AUC</a></li>
+  <li><a href="#step-5-visualize-the-roc-curve" id="toc-step-5-visualize-the-roc-curve" class="nav-link" data-scroll-target="#step-5-visualize-the-roc-curve"><span class="header-section-number">1.8</span> Step 5: Visualize the ROC Curve</a>
+  <ul class="collapse">
+  <li><a href="#basic-plot-with-proc" id="toc-basic-plot-with-proc" class="nav-link" data-scroll-target="#basic-plot-with-proc"><span class="header-section-number">1.8.1</span> Basic Plot with <code>pROC</code></a></li>
+  <li><a href="#polished-plot-with-ggplot2" id="toc-polished-plot-with-ggplot2" class="nav-link" data-scroll-target="#polished-plot-with-ggplot2"><span class="header-section-number">1.8.2</span> Polished Plot with <code>ggplot2</code></a></li>
+  <li><a href="#comparing-multiple-roc-curves" id="toc-comparing-multiple-roc-curves" class="nav-link" data-scroll-target="#comparing-multiple-roc-curves"><span class="header-section-number">1.8.3</span> Comparing Multiple ROC Curves</a></li>
+  </ul></li>
+  <li><a href="#step-6-evaluate-your-results" id="toc-step-6-evaluate-your-results" class="nav-link" data-scroll-target="#step-6-evaluate-your-results"><span class="header-section-number">1.9</span> Step 6: Evaluate Your Results</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">1.10</span> Additional Resources</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">User Guide</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Evaluating Diagnostic Tests with ROC Curves in R</span></h1>
 </div>
 
 
@@ -178,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 4, 2026</p>
+      <p class="date">March 6, 2026</p>
     </div>
   </div>
   
@@ -190,10 +272,451 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>First off, you should change this section title to something more appropriate.</p>
-<p>Next, well, that’s up to you. Good luck!</p>
+<section id="introduction" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1.1</span> Introduction</h2>
+<p>Diagnostic tests in medicine and biology rarely produce a simple yes/no result. More often, they produce a continuous measurement, for example a biomarker concentration, an imaging score, a blood pressure reading. The researcher must decide how well that measurement distinguishes between individuals with and without a condition. Receiver Operating Characteristic (ROC) curves are one of the most widely used tools for evaluating this kind of diagnostic performance.</p>
+<p>This guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the <code>pROC</code> package <span class="citation" data-cites="robin2011">(<a href="references.html#ref-robin2011" role="doc-biblioref">Robin et al. 2011</a>)</span>.</p>
+<p>This guide does <strong>not</strong> cover advanced topics such as covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection (e.g., the Youden Index). Those topics are excluded to keep the focus on foundational ROC analysis.</p>
+<hr>
+</section>
+<section id="prerequisites" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">1.2</span> Prerequisites</h2>
+<section id="knowledge" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="knowledge"><span class="header-section-number">1.2.1</span> Knowledge</h3>
+<p>You should be familiar with:</p>
+<ul>
+<li><strong>Sensitivity</strong>: the probability that the test is positive given the person has the disease (true positive rate)</li>
+<li><strong>Specificity</strong>: the probability that the test is negative given the person does not have the disease (true negative rate)</li>
+<li><strong>Binary outcomes</strong>: your reference standard should classify each individual as diseased (1) or non-diseased (0)</li>
+</ul>
+<p>No prior experience with ROC curves is needed</p>
+</section>
+<section id="software" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="software"><span class="header-section-number">1.2.2</span> Software</h3>
+<p>You will need R and RStudio installed, along with the following packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#loading the following packages and install if necessary</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'pROC' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Type 'citation("pROC")' for a citation.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'pROC'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    cov, smooth, var</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlbench)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'mlbench' was built under R version 4.4.3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="the-data" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="the-data"><span class="header-section-number">1.3</span> The Data</h2>
+<p>This guide uses three datasets to demonstrate ROC analysis across different applied contexts.</p>
+<section id="asah-aneurysmal-subarachnoid-hemorrhage" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="asah-aneurysmal-subarachnoid-hemorrhage"><span class="header-section-number">1.3.1</span> 1. <code>aSAH</code> — Aneurysmal Subarachnoid Hemorrhage</h3>
+<p>Built into the <code>pROC</code> package. The dataset contains clinical and biomarker data from patients with subarachnoid hemorrhage. We use the biomarker <code>s100b</code> to predict a poor neurological outcome (<code>outcome</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load and preview dataset-asah</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(aSAH)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aSAH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   gos6 outcome gender age wfns s100b  ndka
+29    5    Good Female  42    1  0.13  3.01
+30    5    Good Female  37    1  0.14  8.54
+31    5    Good Female  42    1  0.10  8.09
+32    5    Good Female  27    1  0.04 10.42
+33    1    Poor Female  42    3  0.13 17.40
+34    1    Poor   Male  48    2  0.10 12.75</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(aSAH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   113 obs. of  7 variables:
+ $ gos6   : Ord.factor w/ 5 levels "1"&lt;"2"&lt;"3"&lt;"4"&lt;..: 5 5 5 5 1 1 4 1 5 4 ...
+ $ outcome: Factor w/ 2 levels "Good","Poor": 1 1 1 1 2 2 1 2 1 1 ...
+ $ gender : Factor w/ 2 levels "Male","Female": 2 2 2 2 2 1 1 1 2 2 ...
+ $ age    : int  42 37 42 27 42 48 57 41 49 75 ...
+ $ wfns   : Ord.factor w/ 5 levels "1"&lt;"2"&lt;"3"&lt;"4"&lt;..: 1 1 1 1 3 2 5 4 1 2 ...
+ $ s100b  : num  0.13 0.14 0.1 0.04 0.13 0.1 0.47 0.16 0.18 0.1 ...
+ $ ndka   : num  3.01 8.54 8.09 10.42 17.4 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="pimaindiansdiabetes-diabetes-screening" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="pimaindiansdiabetes-diabetes-screening"><span class="header-section-number">1.3.2</span> 2. <code>PimaIndiansDiabetes</code> — Diabetes Screening</h3>
+<p>From the <code>mlbench</code> package, the dataset contains health measurements for Pima Indian women. We use <code>glucose</code> to predict diabetes status (<code>diabetes</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load and preview data set-pima</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(PimaIndiansDiabetes)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(PimaIndiansDiabetes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  pregnant glucose pressure triceps insulin mass pedigree age diabetes
+1        6     148       72      35       0 33.6    0.627  50      pos
+2        1      85       66      29       0 26.6    0.351  31      neg
+3        8     183       64       0       0 23.3    0.672  32      pos
+4        1      89       66      23      94 28.1    0.167  21      neg
+5        0     137       40      35     168 43.1    2.288  33      pos
+6        5     116       74       0       0 25.6    0.201  30      neg</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(PimaIndiansDiabetes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   768 obs. of  9 variables:
+ $ pregnant: num  6 1 8 1 0 5 3 10 2 8 ...
+ $ glucose : num  148 85 183 89 137 116 78 115 197 125 ...
+ $ pressure: num  72 66 64 66 40 74 50 0 70 96 ...
+ $ triceps : num  35 29 0 23 35 0 32 0 45 0 ...
+ $ insulin : num  0 0 0 94 168 0 88 0 543 0 ...
+ $ mass    : num  33.6 26.6 23.3 28.1 43.1 25.6 31 35.3 30.5 0 ...
+ $ pedigree: num  0.627 0.351 0.672 0.167 2.288 ...
+ $ age     : num  50 31 32 21 33 30 26 29 53 54 ...
+ $ diabetes: Factor w/ 2 levels "neg","pos": 2 1 2 1 2 1 2 1 2 2 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="cleveland-heart-disease-dataset" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="cleveland-heart-disease-dataset"><span class="header-section-number">1.3.3</span> 3. Cleveland Heart Disease Dataset</h3>
+<p>Loaded directly from the UCI Machine Learning Repository. We use <code>thalach</code> (maximum heart rate achieved) to predict heart disease presence (<code>target</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load-heart</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>heart <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.strings =</span> <span class="st">"?"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(heart) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"cp"</span>, <span class="st">"trestbps"</span>, <span class="st">"chol"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"fbs"</span>, <span class="st">"restecg"</span>, <span class="st">"thalach"</span>, <span class="st">"exang"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"oldpeak"</span>, <span class="st">"slope"</span>, <span class="st">"ca"</span>, <span class="st">"thal"</span>, <span class="st">"target"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>heart<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(heart<span class="sc">$</span>target <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age sex cp trestbps chol fbs restecg thalach exang oldpeak slope ca thal
+1  63   1  1      145  233   1       2     150     0     2.3     3  0    6
+2  67   1  4      160  286   0       2     108     1     1.5     2  3    3
+3  67   1  4      120  229   0       2     129     1     2.6     2  2    7
+4  37   1  3      130  250   0       0     187     0     3.5     3  0    3
+5  41   0  2      130  204   0       2     172     0     1.4     1  0    3
+6  56   1  2      120  236   0       0     178     0     0.8     1  0    3
+  target
+1      0
+2      1
+3      1
+4      0
+5      0
+6      0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   303 obs. of  14 variables:
+ $ age     : num  63 67 67 37 41 56 62 57 63 53 ...
+ $ sex     : num  1 1 1 1 0 1 0 0 1 1 ...
+ $ cp      : num  1 4 4 3 2 2 4 4 4 4 ...
+ $ trestbps: num  145 160 120 130 130 120 140 120 130 140 ...
+ $ chol    : num  233 286 229 250 204 236 268 354 254 203 ...
+ $ fbs     : num  1 0 0 0 0 0 0 0 0 1 ...
+ $ restecg : num  2 2 2 0 2 0 2 0 2 2 ...
+ $ thalach : num  150 108 129 187 172 178 160 163 147 155 ...
+ $ exang   : num  0 1 1 0 0 0 0 1 0 1 ...
+ $ oldpeak : num  2.3 1.5 2.6 3.5 1.4 0.8 3.6 0.6 1.4 3.1 ...
+ $ slope   : num  3 2 2 3 1 1 3 1 2 3 ...
+ $ ca      : num  0 3 2 0 0 0 2 0 1 0 ...
+ $ thal    : num  6 3 7 3 3 3 3 3 7 7 ...
+ $ target  : num  0 1 1 0 0 0 1 0 1 1 ...</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="step-1-is-roc-analysis-appropriate-for-your-data" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="step-1-is-roc-analysis-appropriate-for-your-data"><span class="header-section-number">1.4</span> Step 1: Is ROC Analysis Appropriate for Your Data?</h2>
+<p>Before writing any code, confirm that ROC analysis is the right tool.</p>
+<p><strong>ROC analysis is appropriate when:</strong></p>
+<ul>
+<li>Your diagnostic test produces a <strong>continuous or ordinal</strong> result (e.g., a blood glucose level, a probability score)</li>
+<li>You have a <strong>binary reference standard</strong> — each observation is either diseased (1) or non-diseased (0)</li>
+<li>Your goal is to evaluate <strong>overall discriminative ability</strong> across all possible thresholds, not performance at one specific cutoff</li>
+</ul>
+<p><strong>ROC analysis is not appropriate when:</strong></p>
+<ul>
+<li>Your test result is already <strong>binary</strong> (positive/negative)</li>
+<li>Disease <strong>prevalence is very low</strong></li>
+<li>The <strong>costs of false positives and false negatives are very different</strong> — ROC curves treat both error types equally</li>
+</ul>
+<section id="quick-checklist" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="quick-checklist"><span class="header-section-number">1.4.1</span> Quick Checklist</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Required Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Is the test result continuous or ordinal?</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Is the outcome binary (diseased / not diseased)?</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Am I interested in performance across all thresholds?</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Is disease prevalence reasonably balanced?</td>
+<td>Ideally yes</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="step-2-prepare-your-data" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="step-2-prepare-your-data"><span class="header-section-number">1.5</span> Step 2: Prepare Your Data</h2>
+<p>Your dataset must have at minimum:</p>
+<ul>
+<li>A <strong>numeric column</strong> for the test result</li>
+<li>A <strong>binary column</strong> for the outcome (0/1 or a two-level factor)</li>
+</ul>
+<p>Check your data structure and look for missing values before proceeding.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check structure</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(aSAH)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   113 obs. of  7 variables:
+ $ gos6   : Ord.factor w/ 5 levels "1"&lt;"2"&lt;"3"&lt;"4"&lt;..: 5 5 5 5 1 1 4 1 5 4 ...
+ $ outcome: Factor w/ 2 levels "Good","Poor": 1 1 1 1 2 2 1 2 1 1 ...
+ $ gender : Factor w/ 2 levels "Male","Female": 2 2 2 2 2 1 1 1 2 2 ...
+ $ age    : int  42 37 42 27 42 48 57 41 49 75 ...
+ $ wfns   : Ord.factor w/ 5 levels "1"&lt;"2"&lt;"3"&lt;"4"&lt;..: 1 1 1 1 3 2 5 4 1 2 ...
+ $ s100b  : num  0.13 0.14 0.1 0.04 0.13 0.1 0.47 0.16 0.18 0.1 ...
+ $ ndka   : num  3.01 8.54 8.09 10.42 17.4 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(aSAH<span class="sc">$</span>s100b))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(aSAH<span class="sc">$</span>outcome))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm outcome levels</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(aSAH<span class="sc">$</span>outcome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Good Poor 
+  72   41 </code></pre>
+</div>
+</div>
+<p>The <code>pROC</code> package drops missing values automatically, but you should know how many observations are affected. If missingness is substantial or non-random, address it before running the analysis.</p>
+</section>
+<section id="step-3-generate-the-roc-curve" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="step-3-generate-the-roc-curve"><span class="header-section-number">1.6</span> Step 3: Generate the ROC Curve</h2>
+<p>Use <code>pROC::roc()</code> to fit the ROC curve. The two key arguments are:</p>
+<ul>
+<li><code>response</code>: the binary outcome variable</li>
+<li><code>predictor</code>: the continuous test result</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>roc_asah <span class="ot">&lt;-</span> <span class="fu">roc</span>(<span class="at">response =</span> aSAH<span class="sc">$</span>outcome, <span class="at">predictor =</span> aSAH<span class="sc">$</span>s100b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = Good, case = Poor</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>roc_asah</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = aSAH$outcome, predictor = aSAH$s100b)
+
+Data: aSAH$s100b in 72 controls (aSAH$outcome Good) &lt; 41 cases (aSAH$outcome Poor).
+Area under the curve: 0.7314</code></pre>
+</div>
+</div>
+<section id="understanding-the-direction-warning" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="understanding-the-direction-warning"><span class="header-section-number">1.6.1</span> Understanding the Direction Warning</h3>
+<p><code>pROC</code> will print a message about the <code>direction</code> it assumed (e.g., <code>direction: controls &lt; cases</code>). This tells you whether higher test values are assumed to indicate disease. <strong>Do not ignore this.</strong> If the assumed direction is wrong for your test, your curve will be mirrored and your AUC will be below 0.5. You can set the direction explicitly:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Higher s100b -&gt; worse outcome: controls &lt; cases (default is correct here)</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>roc_asah <span class="ot">&lt;-</span> <span class="fu">roc</span>(<span class="at">response =</span> aSAH<span class="sc">$</span>outcome,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">predictor =</span> aSAH<span class="sc">$</span>s100b,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">direction =</span> <span class="st">"&lt;"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = Good, case = Poor</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="step-4-compute-and-interpret-auc" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="step-4-compute-and-interpret-auc"><span class="header-section-number">1.7</span> Step 4: Compute and Interpret AUC</h2>
+<p>The Area Under the Curve (AUC) summarizes the ROC curve in a single number.</p>
+<ul>
+<li><strong>AUC = 0.5</strong>: the test performs no better than random chance</li>
+<li><strong>AUC = 1.0</strong>: the test perfectly separates diseased from non-diseased individuals</li>
+<li><strong>AUC = 0.7–0.8</strong>: generally considered acceptable discrimination</li>
+<li><strong>AUC &gt; 0.8</strong>: generally considered excellent discrimination</li>
+</ul>
+<p>These are rough benchmarks — what counts as “good enough” depends on your clinical or scientific context.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(roc_asah)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Area under the curve: 0.7314</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.auc</span>(roc_asah)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>95% CI: 0.6301-0.8326 (DeLong)</code></pre>
+</div>
+</div>
+<p>Repeat for the other datasets:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>roc_pima <span class="ot">&lt;-</span> <span class="fu">roc</span>(<span class="at">response =</span> PimaIndiansDiabetes<span class="sc">$</span>diabetes,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">predictor =</span> PimaIndiansDiabetes<span class="sc">$</span>glucose,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">direction =</span> <span class="st">"&lt;"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = neg, case = pos</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(roc_pima)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Area under the curve: 0.7881</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.auc</span>(roc_pima)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>95% CI: 0.7546-0.8217 (DeLong)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>heart_clean <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(heart[, <span class="fu">c</span>(<span class="st">"thalach"</span>, <span class="st">"target"</span>)])</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>roc_heart <span class="ot">&lt;-</span> <span class="fu">roc</span>(<span class="at">response =</span> heart_clean<span class="sc">$</span>target,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">predictor =</span> heart_clean<span class="sc">$</span>thalach,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">direction =</span> <span class="st">"&gt;"</span>)  <span class="co"># higher heart rate -&gt; less likely disease</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(roc_heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Area under the curve: 0.7453</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.auc</span>(roc_heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>95% CI: 0.6901-0.8005 (DeLong)</code></pre>
+</div>
+</div>
+</section>
+<section id="step-5-visualize-the-roc-curve" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="step-5-visualize-the-roc-curve"><span class="header-section-number">1.8</span> Step 5: Visualize the ROC Curve</h2>
+<p>A good visualization shows the curve, the diagonal reference line (random chance), and the AUC value.</p>
+<section id="basic-plot-with-proc" class="level3" data-number="1.8.1">
+<h3 data-number="1.8.1" class="anchored" data-anchor-id="basic-plot-with-proc"><span class="header-section-number">1.8.1</span> Basic Plot with <code>pROC</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roc_asah,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"ROC Curve: s100b predicting poor outcome (aSAH)"</span>,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#2c7bb6"</span>,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>,</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">"AUC ="</span>, <span class="fu">round</span>(<span class="fu">auc</span>(roc_asah), <span class="dv">3</span>)),</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"#2c7bb6"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="guide_files/figure-html/plot-basic-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="polished-plot-with-ggplot2" class="level3" data-number="1.8.2">
+<h3 data-number="1.8.2" class="anchored" data-anchor-id="polished-plot-with-ggplot2"><span class="header-section-number">1.8.2</span> Polished Plot with <code>ggplot2</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>roc_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">specificity =</span> roc_asah<span class="sc">$</span>specificities,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sensitivity =</span> roc_asah<span class="sc">$</span>sensitivities</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(roc_df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span> <span class="sc">-</span> specificity, <span class="at">y =</span> sensitivity)) <span class="sc">+</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#2c7bb6"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.75</span>, <span class="at">y =</span> <span class="fl">0.1</span>,</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"AUC ="</span>, <span class="fu">round</span>(<span class="fu">auc</span>(roc_asah), <span class="dv">3</span>)),</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"#2c7bb6"</span>) <span class="sc">+</span></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ROC Curve: s100b predicting poor outcome (aSAH)"</span>,</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"1 - Specificity (False Positive Rate)"</span>,</span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sensitivity (True Positive Rate)"</span>) <span class="sc">+</span></span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="guide_files/figure-html/plot-ggplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-multiple-roc-curves" class="level3" data-number="1.8.3">
+<h3 data-number="1.8.3" class="anchored" data-anchor-id="comparing-multiple-roc-curves"><span class="header-section-number">1.8.3</span> Comparing Multiple ROC Curves</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggroc</span>(<span class="fu">list</span>(<span class="at">aSAH =</span> roc_asah, <span class="at">Diabetes =</span> roc_pima, <span class="at">Heart =</span> roc_heart),</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ROC Curve Comparison Across Datasets"</span>,</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"1 - Specificity"</span>, <span class="at">y =</span> <span class="st">"Sensitivity"</span>,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Dataset"</span>) <span class="sc">+</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="guide_files/figure-html/plot-compare-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-6-evaluate-your-results" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="step-6-evaluate-your-results"><span class="header-section-number">1.9</span> Step 6: Evaluate Your Results</h2>
+<p>Once you have a curve and AUC, ask yourself:</p>
+<ul>
+<li>Does the curve bow toward the <strong>upper-left</strong> corner? If it hugs the diagonal, the test has little discriminative ability.</li>
+<li>Is the <strong>AUC above 0.5</strong>? If not, check whether the <code>direction</code> argument is set correctly.</li>
+<li>Does the <strong>observation count</strong> in the <code>pROC</code> output match your dataset? If not, check for unexpected missing values.</li>
+<li>Is the <strong>confidence interval</strong> for the AUC reasonably narrow? Wide intervals suggest insufficient sample size.</li>
+<li>Does the AUC make sense given what is known about this test from prior literature?</li>
+</ul>
+</section>
+<section id="additional-resources" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">1.10</span> Additional Resources</h2>
+<ul>
+<li><strong><code>pROC</code> vignette</strong>: Run <code>vignette("pROC")</code> in R or see <span class="citation" data-cites="robin2011">Robin et al. (<a href="references.html#ref-robin2011" role="doc-biblioref">2011</a>)</span> for the full paper</li>
+<li><strong>Fawcett (2006)</strong>: A readable conceptual introduction to ROC analysis <span class="citation" data-cites="fawcett2006">(<a href="references.html#ref-fawcett2006" role="doc-biblioref">Fawcett 2006</a>)</span></li>
+<li><strong>Pepe (2003)</strong>: A comprehensive textbook treatment of diagnostic test evaluation <span class="citation" data-cites="pepe2003">(<a href="references.html#ref-pepe2003" role="doc-biblioref"><strong>pepe2003?</strong></a>)</span></li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-fawcett2006" class="csl-entry" role="listitem">
+Fawcett, Tom. 2006. <span>“An Introduction to <span>ROC</span> Analysis.”</span> <em>Pattern Recognition Letters</em> 27 (8): 861–74. <a href="https://doi.org/10.1016/j.patrec.2005.10.010">https://doi.org/10.1016/j.patrec.2005.10.010</a>.
+</div>
+<div id="ref-robin2011" class="csl-entry" role="listitem">
+Robin, Xavier, Natacha Turck, Alexandre Hainard, Natalia Tiberti, Frédérique Lisacek, Jean-Charles Sanchez, and Markus Müller. 2011. <span>“<span class="nocase">pROC</span>: An Open-Source Package for <span>R</span> and <span>S</span>+ to Analyze and Compare <span>ROC</span> Curves.”</span> <em>BMC Bioinformatics</em> 12 (1): 77. <a href="https://doi.org/10.1186/1471-2105-12-77">https://doi.org/10.1186/1471-2105-12-77</a>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -615,9 +1138,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Assignment Flow">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment Flow</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./references.html" class="pagination-link" aria-label="References">
