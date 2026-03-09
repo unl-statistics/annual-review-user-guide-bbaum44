@@ -199,6 +199,19 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Does the data have to be approximately normally distributed?</p>
 <p>The dataset must have a numeric column for the continuous test result and a binary column for disease status (0/1 or a two-level factor). (ROC analysis is not appropriate for binary test results) Missing values are dropped by default in <code>pROC</code>, so users should check how many observations are affected. No distribution assumptions are required.</p></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ok, so does the continuous test result need to have a specific range? What happens if it is pathologically close to binary – e.g.&nbsp;-1ish for about half the observations, 1ish for about half of the observations, with one observation in the middle at 0? I suspect it’s not quite so easy as just saying “continuous” – usually there are still some basic expectations (that may not be well defined, but that you should define as well as you can).</p>
+</div>
+</div>
 <p>What are the basic components of the task? - Outline these in a bit more detail</p>
 <ol type="1">
 <li>Decide if ROC analysis is appropriate.(this includes identifieing if the results are continous or binary and if the use of a ROC curve is relevant)</li>

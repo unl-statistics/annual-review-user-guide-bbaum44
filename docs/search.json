@@ -15,7 +15,7 @@
     "href": "guide.html",
     "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
     "section": "",
-    "text": "1.1 Introduction\nDiagnostic tests in medicine and biology rarely produce a simple yes/no result. More often, they produce a continuous measurement, for example a biomarker concentration, an imaging score, a blood pressure reading. The researcher must decide how well that measurement distinguishes between individuals with and without a condition. Receiver Operating Characteristic (ROC) curves are one of the most widely used tools for evaluating this kind of diagnostic performance.\nThis guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the pROC package (Robin et al. 2011).\nThis guide does not cover advanced topics such as covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection (e.g., the Youden Index). Those topics are excluded to keep the focus on foundational ROC analysis.",
+    "text": "1.1 Introduction\nDiagnostic tests in medicine and biology rarely produce a simple yes/no result. More often, they produce a continuous measurement, for example a biomarker concentration, an imaging score, a blood pressure reading. The researcher must decide how well that measurement distinguishes between individuals with and without a condition. Receiver Operating Characteristic (ROC) curves are one of the most widely used tools for evaluating this kind of diagnostic performance.\nThis guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the pROC package (robin2011?).\nThis guide does not cover advanced topics such as covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection (e.g., the Youden Index). Those topics are excluded to keep the focus on foundational ROC analysis.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
     ]
@@ -105,19 +105,9 @@
     "href": "guide.html#additional-resources",
     "title": "1  Evaluating Diagnostic Tests with ROC Curves in R",
     "section": "1.10 Additional Resources",
-    "text": "1.10 Additional Resources\n\npROC vignette: Run vignette(\"pROC\") in R or see Robin et al. (2011) for the full paper\nFawcett (2006): A readable conceptual introduction to ROC analysis (Fawcett 2006)\nPepe (2003): A comprehensive textbook treatment of diagnostic test evaluation (pepe2003?)\n\n\n\n\n\nFawcett, Tom. 2006. “An Introduction to ROC Analysis.” Pattern Recognition Letters 27 (8): 861–74. https://doi.org/10.1016/j.patrec.2005.10.010.\n\n\nRobin, Xavier, Natacha Turck, Alexandre Hainard, Natalia Tiberti, Frédérique Lisacek, Jean-Charles Sanchez, and Markus Müller. 2011. “pROC: An Open-Source Package for R and S+ to Analyze and Compare ROC Curves.” BMC Bioinformatics 12 (1): 77. https://doi.org/10.1186/1471-2105-12-77.",
+    "text": "1.10 Additional Resources\n\npROC vignette: Run vignette(\"pROC\") in R or see (robin2011?) for the full paper\nFawcett (2006): A readable conceptual introduction to ROC analysis (fawcett2006?)\nPepe (2003): A comprehensive textbook treatment of diagnostic test evaluation (pepe2003?)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Evaluating Diagnostic Tests with ROC Curves in R</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Fawcett, Tom. 2006. “An Introduction to ROC\nAnalysis.” Pattern Recognition Letters 27 (8): 861–74.\nhttps://doi.org/10.1016/j.patrec.2005.10.010.\n\n\nRobin, Xavier, Natacha Turck, Alexandre Hainard, Natalia Tiberti,\nFrédérique Lisacek, Jean-Charles Sanchez, and Markus Müller. 2011.\n“pROC: An Open-Source Package for\nR and S+ to Analyze and Compare\nROC Curves.” BMC Bioinformatics 12 (1): 77.\nhttps://doi.org/10.1186/1471-2105-12-77.",
-    "crumbs": [
-      "References"
     ]
   },
   {

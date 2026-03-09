@@ -55,27 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -275,7 +255,7 @@ div.csl-indent {
 <section id="introduction" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1.1</span> Introduction</h2>
 <p>Diagnostic tests in medicine and biology rarely produce a simple yes/no result. More often, they produce a continuous measurement, for example a biomarker concentration, an imaging score, a blood pressure reading. The researcher must decide how well that measurement distinguishes between individuals with and without a condition. Receiver Operating Characteristic (ROC) curves are one of the most widely used tools for evaluating this kind of diagnostic performance.</p>
-<p>This guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the <code>pROC</code> package <span class="citation" data-cites="robin2011">(<a href="references.html#ref-robin2011" role="doc-biblioref">Robin et al. 2011</a>)</span>.</p>
+<p>This guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the <code>pROC</code> package <span class="citation" data-cites="robin2011">(<a href="references.html#ref-robin2011" role="doc-biblioref"><strong>robin2011?</strong></a>)</span>.</p>
 <p>This guide does <strong>not</strong> cover advanced topics such as covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection (e.g., the Youden Index). Those topics are excluded to keep the focus on foundational ROC analysis.</p>
 <hr>
 </section>
@@ -702,20 +682,12 @@ Area under the curve: 0.7314</code></pre>
 <section id="additional-resources" class="level2" data-number="1.10">
 <h2 data-number="1.10" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">1.10</span> Additional Resources</h2>
 <ul>
-<li><strong><code>pROC</code> vignette</strong>: Run <code>vignette("pROC")</code> in R or see <span class="citation" data-cites="robin2011">Robin et al. (<a href="references.html#ref-robin2011" role="doc-biblioref">2011</a>)</span> for the full paper</li>
-<li><strong>Fawcett (2006)</strong>: A readable conceptual introduction to ROC analysis <span class="citation" data-cites="fawcett2006">(<a href="references.html#ref-fawcett2006" role="doc-biblioref">Fawcett 2006</a>)</span></li>
+<li><strong><code>pROC</code> vignette</strong>: Run <code>vignette("pROC")</code> in R or see <span class="citation" data-cites="robin2011">(<a href="references.html#ref-robin2011" role="doc-biblioref"><strong>robin2011?</strong></a>)</span> for the full paper</li>
+<li><strong>Fawcett (2006)</strong>: A readable conceptual introduction to ROC analysis <span class="citation" data-cites="fawcett2006">(<a href="references.html#ref-fawcett2006" role="doc-biblioref"><strong>fawcett2006?</strong></a>)</span></li>
 <li><strong>Pepe (2003)</strong>: A comprehensive textbook treatment of diagnostic test evaluation <span class="citation" data-cites="pepe2003">(<a href="references.html#ref-pepe2003" role="doc-biblioref"><strong>pepe2003?</strong></a>)</span></li>
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-fawcett2006" class="csl-entry" role="listitem">
-Fawcett, Tom. 2006. <span>“An Introduction to <span>ROC</span> Analysis.”</span> <em>Pattern Recognition Letters</em> 27 (8): 861–74. <a href="https://doi.org/10.1016/j.patrec.2005.10.010">https://doi.org/10.1016/j.patrec.2005.10.010</a>.
-</div>
-<div id="ref-robin2011" class="csl-entry" role="listitem">
-Robin, Xavier, Natacha Turck, Alexandre Hainard, Natalia Tiberti, Frédérique Lisacek, Jean-Charles Sanchez, and Markus Müller. 2011. <span>“<span class="nocase">pROC</span>: An Open-Source Package for <span>R</span> and <span>S</span>+ to Analyze and Compare <span>ROC</span> Curves.”</span> <em>BMC Bioinformatics</em> 12 (1): 77. <a href="https://doi.org/10.1186/1471-2105-12-77">https://doi.org/10.1186/1471-2105-12-77</a>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
