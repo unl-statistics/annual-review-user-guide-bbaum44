@@ -10,7 +10,14 @@ book:
   page-footer:
     left: "Copyright 2025, Author Name"
   chapters:
+    - index.qmd
     - guide.qmd
+    - prepare.qmd
+    - generate.qmd
+    - compute-auc.qmd
+    - visualize.qmd
+    - evaluate.qmd
+    - resources.qmd
     - references.qmd
   appendices:
     - index.qmd

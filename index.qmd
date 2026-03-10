@@ -1,2 +1,80 @@
-# Assignment Flow {.unnumbered}
+# Introduction
 
+Diagnostic tests in medicine and biology rarely produce a simple yes/no result. More often, they produce a continuous measurement, for example a biomarker concentration, an imaging score, a blood pressure reading. The researcher must decide how well that measurement distinguishes between individuals with and without a condition. Receiver Operating Characteristic (ROC) curves are one of the most widely used tools for evaluating this kind of diagnostic performance.
+
+This guide walks through the full ROC analysis workflow in R: deciding whether ROC analysis is appropriate for your data, preparing your dataset, generating and visualizing the ROC curve, and computing and interpreting the Area Under the Curve (AUC). All steps are demonstrated with real datasets and annotated code using the `pROC` package [@robin2011].
+
+This guide does **not** cover advanced topics such as covariate-adjusted ROC curves, time-dependent ROC analysis, or optimal threshold selection (e.g., the Youden Index). Those topics are excluded to keep the focus on foundational ROC analysis.
+
+---
+
+## Prerequisites
+
+### Knowledge
+
+You should be familiar with:
+
+- **Sensitivity**: the probability that the test is positive given the person has the disease (true positive rate)
+- **Specificity**: the probability that the test is negative given the person does not have the disease (true negative rate)
+- **Binary outcomes**: your reference standard should classify each individual as diseased (1) or non-diseased (0)
+
+No prior experience with ROC curves is needed 
+
+### Software
+
+You will need R and RStudio installed, along with the following packages:
+
+```{r}
+#loading the following packages and install if necessary
+library(pROC)
+library(ggplot2)
+library(mlbench)
+```
+
+
+## The Data
+
+This guide uses three datasets to demonstrate ROC analysis across different applied contexts.
+
+### 1. `aSAH` — Aneurysmal Subarachnoid Hemorrhage
+
+Built into the `pROC` package. The dataset contains clinical and biomarker data from patients with subarachnoid hemorrhage. We use the biomarker `s100b` to predict a poor neurological outcome (`outcome`).
+
+```{r}
+#load and preview dataset-asah
+
+data(aSAH)
+head(aSAH)
+str(aSAH)
+```
+
+### 2. `PimaIndiansDiabetes` — Diabetes Screening
+
+From the `mlbench` package, the dataset contains health measurements for Pima Indian women. We use `glucose` to predict diabetes status (`diabetes`).
+
+```{r}
+#load and preview data set-pima
+
+data(PimaIndiansDiabetes)
+head(PimaIndiansDiabetes)
+str(PimaIndiansDiabetes)
+```
+
+### 3. Cleveland Heart Disease Dataset
+
+Loaded directly from the UCI Machine Learning Repository. We use `thalach` (maximum heart rate achieved) to predict heart disease presence (`target`).
+
+```{r}
+#load-heart
+heart <- read.csv(
+  "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+  header = FALSE,
+  na.strings = "?"
+)
+colnames(heart) <- c("age", "sex", "cp", "trestbps", "chol",
+                     "fbs", "restecg", "thalach", "exang",
+                     "oldpeak", "slope", "ca", "thal", "target")
+heart$target <- ifelse(heart$target > 0, 1, 0)
+head(heart)
+str(heart)
+```
