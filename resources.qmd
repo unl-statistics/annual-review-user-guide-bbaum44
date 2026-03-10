@@ -1,0 +1,8 @@
+
+
+# Additional Resources
+
+- **`pROC` vignette**: Run `vignette("pROC")` in R or see @robin2011 for the full paper
+- **Fawcett (2006)**: A readable conceptual introduction to ROC analysis [@fawcett2006]
+- **Pepe (2003)**: A comprehensive textbook treatment of diagnostic test evaluation [@pepe2003]
+

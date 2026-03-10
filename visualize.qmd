@@ -1,0 +1,97 @@
+
+```{r}
+#| include: false
+#load and preview dataset-asah
+
+library(pROC)
+library(ggplot2)
+library(mlbench)
+
+data(aSAH)
+head(aSAH)
+str(aSAH)
+
+#load-heart
+heart <- read.csv(
+  "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+  header = FALSE,
+  na.strings = "?"
+)
+colnames(heart) <- c("age", "sex", "cp", "trestbps", "chol",
+                     "fbs", "restecg", "thalach", "exang",
+                     "oldpeak", "slope", "ca", "thal", "target")
+heart$target <- ifelse(heart$target > 0, 1, 0)
+
+roc_asah <- roc(response = aSAH$outcome,
+                predictor = aSAH$s100b,
+                direction = "<")
+data("PimaIndiansDiabetes")
+
+roc_pima <- roc(response = PimaIndiansDiabetes$diabetes,
+                predictor = PimaIndiansDiabetes$glucose,
+                direction = "<")
+auc(roc_pima)
+ci.auc(roc_pima)
+
+heart_clean <- na.omit(heart[, c("thalach", "target")])
+roc_heart <- roc(response = heart_clean$target,
+                 predictor = heart_clean$thalach,
+                 direction = ">")  # higher heart rate -> less likely disease
+auc(roc_heart)
+ci.auc(roc_heart)
+```
+
+
+# Visualize the ROC Curve
+
+A good visualization shows the curve, the diagonal reference line (random chance), and the AUC value.
+
+## Basic Plot with `pROC`
+
+```{r}
+#| label: plot-basic
+plot(roc_asah,
+     main = "ROC Curve: s100b predicting poor outcome (aSAH)",
+     col = "#2c7bb6",
+     lwd = 2)
+legend("bottomright",
+       legend = paste("AUC =", round(auc(roc_asah), 3)),
+       col = "#2c7bb6", lwd = 2)
+```
+
+## Polished Plot with `ggplot2`
+
+```{r}
+#| label: plot-ggplot
+roc_df <- data.frame(
+  specificity = roc_asah$specificities,
+  sensitivity = roc_asah$sensitivities
+)
+
+ggplot(roc_df, aes(x = 1 - specificity, y = sensitivity)) +
+  geom_line(color = "#2c7bb6", linewidth = 1.2) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray50") +
+  annotate("text", x = 0.75, y = 0.1,
+           label = paste("AUC =", round(auc(roc_asah), 3)),
+           size = 5, color = "#2c7bb6") +
+  labs(title = "ROC Curve: s100b predicting poor outcome (aSAH)",
+       x = "1 - Specificity (False Positive Rate)",
+       y = "Sensitivity (True Positive Rate)") +
+  theme_minimal()
+```
+
+## Comparing Multiple ROC Curves
+
+```{r}
+#| label: plot-compare
+ggroc(list(aSAH = roc_asah, Diabetes = roc_pima, Heart = roc_heart),
+      linewidth = 1.1) +
+  geom_abline(slope = 1, intercept = 1, linetype = "dashed", color = "gray50") +
+  labs(title = "ROC Curve Comparison Across Datasets",
+       x = "1 - Specificity", y = "Sensitivity",
+       color = "Dataset") +
+  theme_minimal()
+```
+
+
+

@@ -1,0 +1,7 @@
+# Brynn
+
+- references.bib didn't compile because the first two entries didn't have a keyword specified (comes before the title in the .bib entry). This is why your bibliography didn't work.
+
+- Formatting wasn't quite appropriate -- better to have an intro and separate chapters for the different steps -- easier to navigate, only slightly more of a pain in the ... to create. See pushed version for changes
+
+- It would be helpful to show an ROC curve that goes in the wrong direction when you're warning people about that. In general, you could add a lot more graphics and sketches that would increase comprehension. However, overall your text was clear, direct, and easy to follow.

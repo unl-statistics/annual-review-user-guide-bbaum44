@@ -1,0 +1,10 @@
+# Evaluate Your Results
+
+Once you have a curve and AUC, ask yourself:
+
+- Does the curve bow toward the **upper-left** corner? If it hugs the diagonal, the test has little discriminative ability.
+- Is the **AUC above 0.5**? If not, check whether the `direction` argument is set correctly.
+- Does the **observation count** in the `pROC` output match your dataset? If not, check for unexpected missing values.
+- Is the **confidence interval** for the AUC reasonably narrow? Wide intervals suggest insufficient sample size.
+- Does the AUC make sense given what is known about this test from prior literature?
+

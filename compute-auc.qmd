@@ -1,0 +1,70 @@
+
+```{r}
+#| include: false
+#load and preview dataset-asah
+
+library(pROC)
+library(ggplot2)
+library(mlbench)
+
+data(aSAH)
+head(aSAH)
+str(aSAH)
+
+#load-heart
+heart <- read.csv(
+  "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+  header = FALSE,
+  na.strings = "?"
+)
+colnames(heart) <- c("age", "sex", "cp", "trestbps", "chol",
+                     "fbs", "restecg", "thalach", "exang",
+                     "oldpeak", "slope", "ca", "thal", "target")
+heart$target <- ifelse(heart$target > 0, 1, 0)
+
+roc_asah <- roc(response = aSAH$outcome,
+                predictor = aSAH$s100b,
+                direction = "<")
+```
+
+
+# Compute and Interpret AUC
+
+The Area Under the Curve (AUC) summarizes the ROC curve in a single number.
+
+- **AUC = 0.5**: the test performs no better than random chance
+- **AUC = 1.0**: the test perfectly separates diseased from non-diseased individuals
+- **AUC = 0.7–0.8**: generally considered acceptable discrimination
+- **AUC > 0.8**: generally considered excellent discrimination
+
+These are rough benchmarks — what counts as "good enough" depends on your clinical or scientific context.
+
+```{r}
+#| label: auc-asah
+auc(roc_asah)
+ci.auc(roc_asah)
+```
+
+Repeat for the other datasets:
+
+```{r}
+#| label: roc-pima
+data("PimaIndiansDiabetes")
+
+roc_pima <- roc(response = PimaIndiansDiabetes$diabetes,
+                predictor = PimaIndiansDiabetes$glucose,
+                direction = "<")
+auc(roc_pima)
+ci.auc(roc_pima)
+```
+
+```{r}
+#| label: roc-heart
+heart_clean <- na.omit(heart[, c("thalach", "target")])
+roc_heart <- roc(response = heart_clean$target,
+                 predictor = heart_clean$thalach,
+                 direction = ">")  # higher heart rate -> less likely disease
+auc(roc_heart)
+ci.auc(roc_heart)
+```
+

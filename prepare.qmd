@@ -1,0 +1,28 @@
+
+# Prepare Your Data
+
+Your dataset must have at minimum:
+
+- A **numeric column** for the test result
+- A **binary column** for the outcome (0/1 or a two-level factor)
+
+Check your data structure and look for missing values before proceeding.
+
+```{r}
+#| label: checkdata
+library(pROC)
+data("aSAH")
+
+# Check structure
+str(aSAH)
+
+# Check for missing values
+sum(is.na(aSAH$s100b))
+sum(is.na(aSAH$outcome))
+
+# Confirm outcome levels
+table(aSAH$outcome)
+```
+
+The `pROC` package drops missing values automatically, but you should know how many observations are affected. If missingness is substantial or non-random, address it before running the analysis.
+

@@ -1,0 +1,51 @@
+
+```{r}
+#| include: false
+#load and preview dataset-asah
+
+library(pROC)
+library(ggplot2)
+library(mlbench)
+
+data(aSAH)
+head(aSAH)
+str(aSAH)
+
+#load-heart
+heart <- read.csv(
+  "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+  header = FALSE,
+  na.strings = "?"
+)
+colnames(heart) <- c("age", "sex", "cp", "trestbps", "chol",
+                     "fbs", "restecg", "thalach", "exang",
+                     "oldpeak", "slope", "ca", "thal", "target")
+heart$target <- ifelse(heart$target > 0, 1, 0)
+```
+
+
+
+# Generate the ROC Curve
+
+Use `pROC::roc()` to fit the ROC curve. The two key arguments are:
+
+- `response`: the binary outcome variable
+- `predictor`: the continuous test result
+
+```{r}
+#| label: roc-asah
+roc_asah <- roc(response = aSAH$outcome, predictor = aSAH$s100b)
+roc_asah
+```
+
+## Understanding the Direction Warning
+
+`pROC` will print a message about the `direction` it assumed (e.g., `direction: controls < cases`). This tells you whether higher test values are assumed to indicate disease. **Do not ignore this.** If the assumed direction is wrong for your test, your curve will be mirrored and your AUC will be below 0.5. You can set the direction explicitly:
+
+```{r}
+#| label: roc-direction
+# Higher s100b -> worse outcome: controls < cases (default is correct here)
+roc_asah <- roc(response = aSAH$outcome,
+                predictor = aSAH$s100b,
+                direction = "<")
+```
